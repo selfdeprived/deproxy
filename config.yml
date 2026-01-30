@@ -1,0 +1,12 @@
+proxy_port: 55555
+target_host: "localhost"
+target_port: 25565
+transfer_host: "localhost"
+transfer_port: 55555
+off_title: "Disconnected!"
+off_caption: "Please wait%dots%"
+on_title: "Refreshed."
+on_caption: "Connecting in 5 seconds!"
+# Title and caption color
+off_hex: "#FF5555"
+on_hex: "#55FF55"
