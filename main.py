@@ -315,4 +315,7 @@ def start_proxy():
         ProxySession(client).start()
 
 if __name__ == "__main__":
-    start_proxy()
+    try:
+        start_proxy()
+    except KeyboardInterrupt:
+        print(f"\r[*] Proxy server stopped.")
