@@ -227,7 +227,10 @@ class ProxySession:
 
     def handle_reconnect_limbo(self):
         dot_count = 1
-        self.client_socket.send( title_times(0, 100, 0) )
+        self.client_socket.send( title_times(fade_in, stay, fade_out) )
+
+        self.log(f"Waiting {await_shutdown} seconds for server to completely shut down!")
+        time.sleep(await_shutdown)
 
         while not is_server_up(self.target_host, self.target_port):
             self.log("Server still offline... waiting...")
@@ -250,8 +253,8 @@ class ProxySession:
         # Subtitle Packet
         self.client_socket.send(create_packet(on_caption, on_hex, "subtitle"))
 
-        self.log("Server detected! Waiting 5 seconds for final initialization...")
-        time.sleep(5)
+        self.log(f"Server detected! Waiting {await_running} seconds for final initialization!")
+        time.sleep(await_running)
 
         try:
             with self.lock:
