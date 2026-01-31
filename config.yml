@@ -10,3 +10,5 @@ on_caption: "Connecting in 5 seconds!"
 # Title and caption color
 off_hex: "#FF5555"
 on_hex: "#55FF55"
+# Disconnect reason which makes the proxy hold players
+life_trigger: "Server closed"
