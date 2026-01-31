@@ -145,9 +145,16 @@ class ProxySession:
             if not data:
                 return
 
-            next_state = data[-1]
+            host_len_index = 4
+            host_len = data[host_len_index]
 
-            if next_state in (0x02, 0x03) and valid_check(data):
+            end_index = host_len_index + 1 + host_len + 3
+
+            chopped = data[:end_index]
+
+            next_state = chopped[-1]
+
+            if next_state in (0x02, 0x03) and valid_check(chopped):
                 self.target_socket.send(data)
                 threading.Thread(target=self.bridge_server_to_client, daemon=True).start()
                 threading.Thread(target=self.bridge_client_to_server, daemon=True).start()
@@ -202,7 +209,11 @@ class ProxySession:
             try:
                 data = self.target_socket.recv(262144)
 
-                if not is_server_up(self.target_host, self.target_port):
+                is_disconnect_packet = data[1] == 0x1d
+
+                has_trigger_text = life_trigger.encode('utf-8') in data
+
+                if is_disconnect_packet and has_trigger_text:
                     self.log("Server went offline. Entering Limbo Mode...")
 
                     self.server_alive = False
