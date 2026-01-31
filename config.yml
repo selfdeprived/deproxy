@@ -1,10 +1,15 @@
+# Title message timings
+fade_in: 0
+stay: 100
+fade_out: 0
+# Main settings
 proxy_port: 55555
 target_host: "localhost"
 target_port: 25565
 transfer_host: "localhost"
 transfer_port: 55555
 off_title: "Disconnected!"
-off_caption: "Please wait%dots%"
+off_caption: "Please wait%dots%" # Here you can use dot animation
 on_title: "Refreshed."
 on_caption: "Connecting in 5 seconds!"
 # Title and caption color
@@ -12,3 +17,6 @@ off_hex: "#FF5555"
 on_hex: "#55FF55"
 # Disconnect reason which makes the proxy hold players
 life_trigger: "Server closed"
+# Timings (in seconds)
+await_shutdown: 5
+await_running: 5
